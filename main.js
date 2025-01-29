@@ -1,8 +1,13 @@
 const contenedorProdDest = document.querySelector(".productos");
 //botones de filtrado
+const btnDrop = document.querySelector(".btnDrop");
+const contenedorFiltros=document.querySelector(".seccionBtnFiltr")
 const btnCargarProdDest = document.getElementById("btnCargProdDest");
 const btnCargarProdNorm = document.getElementById("btnCargProdNorm");
 const btnCargarTdProd =document.getElementById("btnCargTdProd");
+//input busqueda
+const inputBusqueda = document.querySelector(".inputBusqueda");
+const btnBuscar = document.querySelector(".btnBuscar");
 let cartaProducto
 let btnComprar
 let objCompr
@@ -12,6 +17,30 @@ let arrCarrito=[]
 let prodMostr=[]
 let prodSubir =[]
 
+btnDrop.onclick =() =>{
+    
+    contenedorFiltros.classList.toggle("ocultar")
+    btnDrop.classList.toggle("activado")
+    
+}
+
+btnBuscar.onclick = (e) =>{
+    e.preventDefault();
+    console.log("holaa ");
+
+    if(inputBusqueda.value !=""){
+     console.log("holaa buscando");
+     
+       prodMostr=arrProductos.filter( (producto) =>  producto.nombre.toLowerCase().includes(inputBusqueda.value.toLowerCase()) && producto.stock>0)
+        return mostrar();
+    }
+    if(inputBusqueda.value ==""){
+        Swal.fire({
+            icon:"error",
+            title:"Tiene que ingresar algo para buscar."
+        })
+    }
+}
 const obtenerProductos  = async () =>{
     if(!localStorage.getItem("productos")){
     const respuesta = fetch(`./productos.json`)
@@ -96,6 +125,13 @@ const mostrar = () =>{
         </div>
         `}
 });
+if(prodMostr.length ==0){
+    contenedorProdDest.innerHTML += `
+    <div class="pantallaSinProd">
+    <h2 class="informe">No hay nada en el carrito</h2>
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_0sFRH4yVvQI88wdwhC8topZE2xVCQH1FLg&s">
+    </div>`
+ } 
 return obtenerBtns ();
 }
 const obtenerBtns =() =>{
@@ -140,4 +176,6 @@ const descontarStock = () =>{
     })
 
 }
-mostrarInicio();
+setTimeout(()=>{
+    mostrarInicio();
+},100)

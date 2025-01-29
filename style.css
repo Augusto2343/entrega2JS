@@ -12,6 +12,18 @@ body{
     flex-flow: row wrap;
     gap: 50px;
 }
+.seccionBtnFiltr{
+    display: flex;
+    flex-flow: column nowrap;
+    z-index: 999;
+    opacity: 1;
+
+}
+.ocultar{
+    opacity: 0;
+    display: none;
+    z-index: 0  ;
+}
 .imagenProducto{
     width: 100%;
 }
@@ -36,6 +48,78 @@ header{
  gap: 40px;   
  display: flex;
 
+}
+.btnDrop{
+    cursor: pointer;
+    color: #000;
+    border-radius: 5px;
+    background-color: #5a5a5a;
+    transition: 0.7s;
+    width: 100%;
+}
+.btnFiltros{
+    background-color: #5a5a5a;
+    padding: 1px;
+    border-radius: 5px;
+    transition: 0.7s;
+}
+#btnDrop:hover{
+    background-color: #818181;
+    transform: scale(1.1);
+
+}
+.activado{
+    cursor: pointer;
+    color: #000;
+    border-radius: 5px;
+    background-color: #5a5a5a;
+    transition: 0.7s;
+    width: 100%;
+    padding-bottom: 10px;
+}
+.btnFilt{
+    color: #000;
+    border-radius: 5px;
+    background-color: #5a5a5a;
+    cursor: pointer;
+    transition: 0.7s;
+}
+.btnFilt:hover{
+    background-color: #818181;
+    transform: scale(1.1);
+
+}
+.buscarForm input{
+    color: black;
+    border-radius:5px;
+    max-height: 20px;
+}
+.buscarForm button{
+    color: #000;
+    border-radius: 5px;
+    background-color: #5a5a5a;
+    cursor: pointer;
+    transition: 0.7s;
+    max-height: 20px;
+}
+.buscarForm button:hover{
+    z-index: 999;
+    background-color: #818181;
+    transform: scale(1.05);
+}
+.buscarForm{
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    gap: 10px;
+}
+.filtroBusc{
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+    width: 100%;
+    padding-bottom: 20px;
+    align-items: center;
 }
 .ocultar{
     display: none;
@@ -96,4 +180,24 @@ width: auto;
     justify-content: space-between;
     padding: 4px;
     width: 100%;
+}
+footer{
+    background-color: rgba(36, 53, 75, 0.575);
+    padding: 10px;
+    display: flex;
+    align-items: center;
+}
+.footerNav{
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-content: center;
+    width: 100%;
+}
+.linkFooter{
+    text-decoration: none;
+    transition: 0.7s;
+}
+.linkFooter:hover{
+    color: rgb(0, 145, 255);
 }
