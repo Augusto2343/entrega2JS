@@ -16,10 +16,13 @@ const obtenerProductos  = async () =>{
     .then(respuesta => respuesta.json())
     .then(productos =>{
         arrProductos=productos
-        console.log(arrProductos)
+        
 
     })
-    .catch(error => console.log("ERROR"))
+    .catch(error => Swal.fire({
+        icon:"error",
+        title:"Algo salió mal"
+    }))
 }
 else{
     arrProductos = JSON.parse(localStorage.getItem("productos"))
@@ -34,7 +37,10 @@ const obtenerCarrito = async () =>{
         arrCarrito=productos
             return comprobar();
     })
-    .catch(error => console.log("ERROR"))
+    .catch(error => Swal.fire({
+        icon:"error",
+        title:"Algo salió mal"
+    }))
 }
 else{
     arrCarrito = JSON.parse(localStorage.getItem("carrito"));
@@ -50,8 +56,7 @@ const cargarEnLocalStorage = () => {
 }  
 obtenerCarrito();
 obtenerProductos();
-console.log(arrCarrito);
-console.log(arrProductos);
+
 const calcularTotalIva = (subtotal) =>{
     total=subtotal+(subtotal*0.21);
     iva=subtotal*0.21
@@ -115,10 +120,9 @@ const mostrarCarrito = () =>{
 
 let btnAgr = Array.from(document.getElementsByClassName("btnAgr"));
 let btnDism = Array.from(document.getElementsByClassName("btnDism"));
-console.log(btnAgr);
 
 contenedorCarrito.onclick = (e) => {
-    console.log(e.target.classList);
+
 
     if(e.target.classList.contains("btnDism") ){
     arrCarrito.forEach((producto) => {

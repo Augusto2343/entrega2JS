@@ -26,10 +26,10 @@ btnDrop.onclick =() =>{
 
 btnBuscar.onclick = (e) =>{
     e.preventDefault();
-    console.log("holaa ");
+    
 
     if(inputBusqueda.value !=""){
-     console.log("holaa buscando");
+     
      
        prodMostr=arrProductos.filter( (producto) =>  producto.nombre.toLowerCase().includes(inputBusqueda.value.toLowerCase()) && producto.stock>0)
         return mostrar();
@@ -47,15 +47,18 @@ const obtenerProductos  = async () =>{
     .then(respuesta => respuesta.json())
     .then(productos =>{
         arrProductos=productos
-        console.log(arrProductos)
+        
 
     })
-    .catch(error => console.log("ERROR"))
+    .catch(error => Swal.fire({
+        icon:"error",
+        title:"Algo salió mal"
+    }))
 }
 else{
     arrProductos = JSON.parse(localStorage.getItem("productos"))
 }
-console.log(arrProductos)
+
 }
 const obtenerCarrito = async () =>{
     if(!localStorage.getItem("carrito")){
@@ -64,7 +67,10 @@ const obtenerCarrito = async () =>{
     .then(productos =>{
         arrCarrito=productos
     })
-    .catch(error => console.log("ERROR"))
+    .catch(error => Swal.fire({
+        icon:"error",
+        title:"Algo salió mal"
+    }))
 }
 else{
     arrCarrito = JSON.parse(localStorage.getItem("carrito"));
@@ -80,13 +86,13 @@ obtenerCarrito();
 
 
 btnCargarProdDest.onclick =()=>{
-    console.log("destacado");
+    
     prodMostr=[];
     prodMostr = arrProductos.filter(producto => producto.tipo === 'destacado' && producto.stock >0);
     return mostrar();
 }
 btnCargarProdNorm.onclick =() =>{
-    console.log("normal");
+    
     
     prodMostr=[];
     prodMostr = arrProductos.filter(producto => producto.tipo === 'normal' && producto.stock >0);
@@ -137,19 +143,17 @@ return obtenerBtns ();
 const obtenerBtns =() =>{
     btnComprar = Array.from(document.getElementsByClassName("btnAgregar"));
     cartaProducto = document.querySelector(".producto");
-    console.log("botones", btnComprar)
-console.log("cartas",cartaProducto);
+    
 }
 
-console.log("botones", btnComprar)
-console.log("cartas",cartaProducto);
+
 
 contenedorProdDest.onclick = (e) =>{
-    console.log(e);
+    
     objCompr = btnComprar.find((boton) => boton.id == e.target.id)
-    console.log("objetivo",objCompr)
+    
     if(objCompr !="" && objCompr != undefined){
-        console.log(objCompr.id);
+        
         return descontarStock();
     }
 }
@@ -165,10 +169,10 @@ const descontarStock = () =>{
                     })
                     productoCarrito.unidad++;
 
-                    console.log("compra realizada")
+                
                 }
             })
-            console.log(arrCarrito)
+        
             return cargarEnLocalStorage();
             
         }
